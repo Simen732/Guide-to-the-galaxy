@@ -1,7 +1,7 @@
 :root{
     --hovedfarge: #1F1F1F;;
     --farge2    : rgb(66, 68, 68);
-    --hvitfarge: rgb(194, 194, 194);
+    --hvitfarge: rgb(172, 172, 172);
     --gråfarge: #4e4e4e;
 }
 
@@ -103,18 +103,61 @@ input {
     ;
     min-height: 1000px;
     width: 100%;
-    overflow-y: hidden;
-
 }
 
 .aside{
     grid-area: aside;
     background-color: var(--gråfarge);
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
+    align-items: center;
+    
+
 }
 
+.aside a{
+    text-decoration: none;
+    list-style: none;
+    list-style-type: none;
+    color: var(--hovedfarge);
+}
+
+
 .main{
+    max-height: 100vh;
+    overflow-y: scroll;
+    color: var(--hvitfarge);
     grid-area: main;
     background-color: var(--hovedfarge);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.section{
+    padding: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#LoginConteiner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 5px var(--hvitfarge);
+    border-radius: 20px;
+    padding-bottom: 20%;
+    min-width: 30%;
+
+}
+
+#LoginConteiner form{
+    display: flex;
+    flex-direction: column;
+}    
+
+form input{
+    margin: 5px;
+}
+

@@ -22,5 +22,19 @@ app.get("/guide", (req, res) => {
 
 });
 
+app.get("/login", (req, res) => {
+    res.render("login");
+
+});
+
+app.post("/login", (req, res) => {
+    console.log("Logger ut her", req.body)
+    const {brukernavn, password} = req.body
+});
+
+app.get("/signUp", (req, res) => {
+    res.render("signUp");
+
+});
 
 app.listen(process.env.PORT);
