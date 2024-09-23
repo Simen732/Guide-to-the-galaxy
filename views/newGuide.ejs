@@ -1,0 +1,75 @@
+<%- include("./partials/head") %>
+<body>
+  <%- include("./partials/nav") %>
+  <h1>ny guide</h1>
+  <div>
+    <form action="" method="post" id="guideForm">
+      <h3>tittel</h3>
+      <input type="text" name="tittel" required>
+      <h3>Tag</h3>
+      <input type="text" name="tag" required>
+      <div id="addNewSection">
+        <div name="idk">
+        <h2>seksjon</h2>
+        <h3>overskrift</h3>
+        <input type="text" name="overskrift" required>
+        <h3>beskrivelse</h3>
+        <input type="text" name="beskrivelse" required>
+        <h3>bilde</h3>
+        <input type="file" name="bilde" >
+        </div>
+        
+    </div>
+    <button>Send innn</button>
+    </form>
+  </div>
+  <button onclick="lagNySeksjon()">new section</button>
+
+<script>
+
+    function lagNySeksjon() {
+        console.log("SAdasdsadasdsds")
+
+        let newSection = document.querySelector("#addNewSection");
+        newSection.innerHTML += `
+    <div id="addNewSection">
+        <h2>seksjon</h2>
+        <h3>overskrift</h3>
+        <input type="text" required>
+        <h3>beskrivelse</h3>
+        <input type="text" required>
+        <h3>bilde</h3>
+        <input type="file">
+    </div>
+    `
+    }
+
+
+    document.getElementById('guideForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+        console.log(this)
+      // Create a new FormData object
+      const formData = new FormData(this);
+
+      console.log(formData);
+
+      // Send the FormData using fetch
+      fetch('/newGuide', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        // Handle success (e.g., show a message or redirect)
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle error (e.g., show an error message)
+      });
+    });
+
+</script>
+
+
+</body>
