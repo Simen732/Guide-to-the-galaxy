@@ -48,7 +48,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/helpdesk")
     .catch((error) => console.log("error",error)) 
 
 
-const userSchema = new Schema({
+const guideSchema = new Schema({
     titel: String,
     tag: String,    
     overskrift: Array,
@@ -58,13 +58,14 @@ const userSchema = new Schema({
 
 })
 
-const brukerSchema = new Schema({
+const userSchema = new Schema({
     email: String,
     password: String    
 })
 
 
-const User = mongoose.model("USer", userSchema)
+const User = mongoose.model("User", userSchema)
+const Guide = mongoose.model("Guide", guideSchema)
     
 
 
@@ -110,6 +111,8 @@ app.post("/signUp", async (req, res) => {
         console.log("Logger ut her", req.body);
         const { brukernavn, password, repeatPassword } = req.body;
 
+        
+
         // Check if passwords match
         if (password === repeatPassword) {
             // Hash the password before saving it to the database
@@ -124,11 +127,11 @@ app.post("/signUp", async (req, res) => {
             
             // Save the new user to the database
             const result = await newUser.save();
-            console.log(result);
+            console.log(result, "result signup");
 
             // Check if the user was successfully created
             if (result._id) {
-                console.log(result)
+                console.log(result, "result signup 2");
                 res.redirect("/dashboard");
             }
         } else {
