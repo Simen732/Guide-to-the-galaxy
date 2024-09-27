@@ -51,6 +51,7 @@ body{
     font-size: 20px;
     border-radius: 20px;
     padding-left: 12px;
+    color: azure;
    
 }
 
@@ -149,6 +150,7 @@ input {
     border-radius: 20px;
     padding-bottom: 20%;
     min-width: 30%;
+    margin-top: 10%;
 
 }
 

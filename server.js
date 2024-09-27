@@ -11,6 +11,28 @@ const password = 'userPassword123';
 
 
 
+const diskStorage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null,"./uploads")
+    },
+    filename: function(req, file, cb){
+        const ext = path.extname(file.originalname)
+        console.log("ext",ext)
+    
+        // if(ext !== ".png" || ext !== ".jpng"){
+        //     return cb(new Error("only png files are allowed, Martin kom deg ut av nettsiden min"))
+        // }
+
+        const filename = file.originalname + ".png"
+
+        cb(null,filename)
+    }
+})
+
+
+const uploads = multer({
+    storage: diskStorage,
+})
 
 dotenv.config();
 
@@ -27,9 +49,20 @@ mongoose.connect("mongodb://127.0.0.1:27017/helpdesk")
 
 
 const userSchema = new Schema({
+    titel: String,
+    tag: String,    
+    overskrift: Array,
+    beskrivelse: Array,    
+    imgFile: Array    
+
+
+})
+
+const brukerSchema = new Schema({
     email: String,
     password: String    
 })
+
 
 const User = mongoose.model("USer", userSchema)
     
@@ -62,6 +95,11 @@ app.get("/signUp", (req, res) => {
 });
 
 app.get("/newGuide", (req, res) => {
+    res.render("newGuide");
+
+});
+
+app.post("/newGuide", uploads.array("bilde"), (req, res) => {
     res.render("newGuide");
 
 });
