@@ -1,54 +1,36 @@
 <%- include("./partials/head") %>
 <body>
-    <!-- <%- include("./partials/head") %> -->
-    <div class="gridConteiner">
-        <div class="aside">
-            <a href="/"> <h3> Home page </h3> </a>
-            <a href="#section1"> <h3> Første section </h3></a>
-            <a href="#section2"> <h3> Andre section </h3></a>
-            <a href="#section3"> <h3> tredje section </h3></a>
-            <a href="#section4"> <h3> fjerde section </h3></a>
-            <a href="#section5"> <h3> femte section</h3></a>
-            <a href="#section6"> <h3> sjette section </h3></a>
-        </div>
-
-        <div class="main">
-            <div id="section1" class="section">
-                <h2 class="sectionTitle"> Title </h2>
-                <img src="/img/pokerogue-logo.webp" alt="">
-                <p class="sectionText"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam natus et, minus recusandae sunt odit quam quia placeat rerum. Odio voluptatem corporis dicta impedit praesentium iure assumenda ea repellat tenetur. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus molestias perspiciatis repudiandae officiis praesentium. Consequuntur nihil quia, quae quibusdam modi laudantium praesentium nemo architecto voluptatibus dolorum enim. Earum, ullam harum./p>
-            </div>
-
-            <div id="section2" class="section">
-                <h2 class="sectionTitle"> Title </h2>
-                <img src="/img/pokerogue-logo.webp" alt="">
-                <p class="sectionText"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam natus et, minus recusandae sunt odit quam quia placeat rerum.lo Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto perspiciatis optio quod numquam possimus cupiditate? Reiciendis laboriosam impedit cupiditate quod blanditiis beatae, laborum a quas, dicta quam odit ratione. Pariatur. Odio voluptatem corporis dicta impedit praesentium iure assumenda ea repellat tenetur.</p>
-            </div>
-
-            <div id="section3" class="section">
-                <h2 class="sectionTitle"> Title </h2>
-                <img src="/img/pokerogue-logo.webp" alt="">
-                <p class="sectionText"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam natus et, minus recusandae sunt odit quam quia placeat rerum. Odio voluptatem corporis dicta impedit praesentium iure assumenda ea repellat tenetur. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos, perspiciatis corrupti. Id minus adipisci totam eaque laborum, suscipit sint molestiae voluptas ad reiciendis ipsam obcaecati illo ipsum accusantium vel! Assumenda.</p>
-            </div>
-
-            <div id="section4" class="section">
-                <h2 class="sectionTitle"> Title </h2>
-                <img src="/img/pokerogue-logo.webp" alt="">
-                <p class="sectionText"> Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, suscipit sequi maiores fugit quidem mollitia, distinctio ut quam fuga cumque autem officia temporibus? Sed repudiandae praesentium accusantium, dicta fugit facere! consectetur adipisicing elit. Laboriosam natus et, minus recusandae sunt odit quam quia placeat rerum. Odio voluptatem corporis dicta impedit praesentium iure assumenda ea repellat tenetur.</p>
-            </div>
-
-            <div id="section5" class="section">
-                <h2 class="sectionTitle"> Title </h2>
-                <img src="/img/pokerogue-logo.webp" alt="">
-                <p class="sectionText"> Lorem ipsum dolor sit amet Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem, quisquam fugiat minus facilis perferendis neque facere voluptatibus eos. Nam porro amet hic cum quaerat sequi nisi quam facilis cumque est. consectetur adipisicing elit. Laboriosam natus et, minus recusandae sunt odit quam quia placeat rerum. Odio voluptatem corporis dicta impedit praesentium iure assumenda ea repellat tenetur.</p>
-            </div>
-
-            <div id="section6" class="section">
-                <h2 class="sectionTitle"> Title </h2>
-                <img src="/img/pokerogue-logo.webp" alt="">
-                <p class="sectionText"> Lorem ipsum dolor Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime omnis repudiandae, cumque repellendus non consequatur quam quod aliquam, nulla quibusdam nisi. Consequuntur iusto rerum officia provident qui, illo sit in. sit amet consectetur adipisicing elit. Laboriosam natus et, minus recusandae sunt odit quam quia placeat rerum. Odio voluptatem corporis dicta impedit praesentium iure assumenda ea repellat tenetur.</p>
-            </div>
-        </div>
+  <div class="gridConteiner">
+    <!-- Navbar/Sidebar with dynamic guide links -->
+    <div class="aside">
+      <% if (guides.length > 0) { %>
+        <% guides.forEach((guide, index) => { %>
+          <!-- Link to each guide section -->
+          <a href="#guide-<%= index %>">
+            <h3><%= guide.titel %></h3>
+          </a>
+        <% }) %>
+      <% } else { %>
+        <h3>No guides available yet!</h3>
+      <% } %>
     </div>
+
+    <!-- Main content where guides are displayed -->
+    <div class="main">
+      <% if (guides.length > 0) { %>
+        <% guides.forEach((guide, index) => { %>
+          <div id="guide-<%= index %>" class="section">
+            <h2 class="sectionTitle"><%= guide.titel %></h2>
+            <% if (guide.imgFile.length > 0) { %>
+              <img src="/uploads/<%= guide.imgFile[0] %>" alt="Guide Image" style="width: 200px;">
+            <% } %>
+            <p class="sectionText"><%= guide.beskrivelse[0] %></p>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <h2>No guides available yet!</h2>
+      <% } %>
+    </div>
+  </div>
 </body>
 </html>

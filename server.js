@@ -58,26 +58,38 @@ const guideSchema = new Schema({
 
 })
 
-const userSchema = new Schema({
+const brukerSchema = new Schema({
     email: String,
     password: String    
 })
 
 
-const User = mongoose.model("User", userSchema)
-const Guide = mongoose.model("Guide", guideSchema)
+const User = mongoose.model("U", brukerSchema)
     
+const Guide = mongoose.model("Guide", guideSchema);
 
+
+  
 
 app.get("/", (req, res) => {
     res.render("index");
 
 });
 
-app.get("/guide", (req, res) => {
-    res.render("guide");
-
+app.get("/guide", async (req, res) => {
+    try {
+        // Fetch all guides from the database
+        const guides = await Guide.find();
+        
+        // Pass the guides to the 'guide' EJS template
+        res.render("guide", { guides });
+    } catch (error) {
+        console.error("Error fetching guides:", error);
+        res.status(500).send("Server error");
+    }
 });
+
+
 
 app.get("/dashboard", (req, res) => {
     res.render("dashboard");
@@ -100,18 +112,48 @@ app.get("/newGuide", (req, res) => {
 
 });
 
-app.post("/newGuide", uploads.array("bilde"), (req, res) => {
-    res.render("newGuide");
+app.post("/newGuide", uploads.array("bilde"), async (req, res) => {
+    try {
+        // Extract form data
+        const { tittel, tag, overskrift, beskrivelse } = req.body;
+        
+        // If there's only one section, overskrift and beskrivelse might not be arrays. Normalize them to arrays.
+        const overskriftsArray = Array.isArray(overskrift) ? overskrift : [overskrift];
+        const beskrivelsesArray = Array.isArray(beskrivelse) ? beskrivelse : [beskrivelse];
+        
+        // Extract filenames of uploaded images
+        const imgFiles = req.files.map(file => file.filename);
 
+        // Create a new guide instance
+        const newGuide = new Guide({
+            titel: tittel,
+            tag: tag,
+            overskrift: overskriftsArray,
+            beskrivelse: beskrivelsesArray,
+            imgFile: imgFiles
+        });
+
+        // Save the guide to the database
+        const savedGuide = await newGuide.save();
+        console.log("Guide saved:", savedGuide);
+
+        // Send a success response or redirect
+        res.status(200).json({ message: "Guide saved successfully!" });
+
+    } catch (error) {
+        console.error("Error saving guide:", error);
+        res.status(500).json({ message: "Server error while saving guide." });
+    }
 });
+
+
+
 
 
 app.post("/signUp", async (req, res) => {
     try {
         console.log("Logger ut her", req.body);
         const { brukernavn, password, repeatPassword } = req.body;
-
-        
 
         // Check if passwords match
         if (password === repeatPassword) {
@@ -127,11 +169,11 @@ app.post("/signUp", async (req, res) => {
             
             // Save the new user to the database
             const result = await newUser.save();
-            console.log(result, "result signup");
+            console.log(result);
 
             // Check if the user was successfully created
             if (result._id) {
-                console.log(result, "result signup 2");
+                console.log(result)
                 res.redirect("/dashboard");
             }
         } else {
@@ -146,24 +188,35 @@ app.post("/signUp", async (req, res) => {
 
 app.post("/login", (req, res) => {
     console.log("Logging in", req.body);
-    const {brukernavn, password} = req.body;
+    const { brukernavn, password } = req.body;
 
-    User.findOne({email: brukernavn}).then((user) => {
-        console.log("results", user)
+    User.findOne({ email: brukernavn }).then((user) => {
+        if (!user) {
+            // If no user is found, return an error
+            console.log("User not found");
+            return res.status(404).json({ message: "User not found" });
+        }
 
+        // If user is found, compare the password
         bcrypt.compare(password, user.password).then((result) => {
-            console.log(result);
-            if(result) {
+            if (result) {
+                console.log("Password match");
                 res.status(200).redirect("/dashboard");
             } else {
-                res.status(500).json({message: "lalala"})
+                console.log("Password does not match");
+                res.status(401).json({ message: "Invalid password" });
             }
-        })
+        }).catch((error) => {
+            console.log("Error comparing passwords", error);
+            res.status(500).json({ message: "Server error" });
+        });
 
     }).catch((error) => {
-        console.log("error", error)
-    })
-})
+        console.log("Error finding user", error);
+        res.status(500).json({ message: "Server error" });
+    });
+});
+
 
 
 
