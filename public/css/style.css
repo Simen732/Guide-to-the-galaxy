@@ -6,7 +6,7 @@
 }
 
 html{
-    overflow: hidden;
+
 }
 
 
@@ -135,53 +135,46 @@ input {
     align-items: center;
 }
 
-/* Style for each guide section */
-/* Style for each guide section */
-/* Styling for the individual guides */
-/* Styling for the individual guides */
-/* Styling for the individual guides */
+
 .section {
-    background-color: #1e1e1e;          /* Darker background for guides */
-    border: 2px solid #333;             /* Dark border around each guide */
-    border-radius: 8px;                 /* Rounded corners */
-    padding: 40px;                      /* Increased padding for spacing */
-    margin: 40px 0;                     /* Increased margin for spacing between guides */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
-    transition: transform 0.2s;         /* Transition for hover effect */
+    background-color: #1e1e1e;          
+    border: 2px solid #333;         
+    border-radius: 8px;                
+    padding: 40px;                      
+    margin: 40px 0;                   
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.2s;        
   }
   
-  /* Increase the size of guide titles */
-  .sectionTitle {
-    font-size: 3.6em;                   /* Doubled font size for titles */
-    margin-bottom: 20px;                /* Increased space below the title */
+
+  .sectionTitle { 
+    font-size: 3.6em;               
+    margin-bottom: 20px;               
   }
   
-  /* Increase the size of the text within the sections */
+  
   .sectionText {
-    font-size: 2.4em;                   /* Doubled font size for text */
-    line-height: 1.5;                   /* Increased line height for readability */
+    font-size: 2.4em;                  
+    line-height: 1.5;                  
   }
   
-  /* Larger images within the guides */
   .section img {
-    width: 100%;                /* Make the image take the full width of the container */
-    height: auto;              /* Maintain aspect ratio */
-    max-width: 800px;          /* Set a maximum width to prevent it from becoming too large */
-    margin: 20px 0;            /* Add margin above and below the image */
-    border-radius: 8px;        /* Optional: round the corners of the image */
+    width: 100%;               
+    height: auto;      
+    max-width: 800px;          
+    margin: 20px 0;            
+    border-radius: 8px;        
   }
-  
-  /* Hover effect for guides */
+
+
   .section:hover {
-    transform: scale(1.02);             /* Slightly increase size on hover */
-    border-color: #666;                 /* Change border color on hover */
+    transform: scale(1.02);             
+    border-color: #666;                 
   }
   
-  
-  
-  /* Image styling (optional) */
+
   img {
-    max-width: 400px;                 /* Increase max image size */
+    max-width: 400px;           
     height: auto;
     margin-top: 15px;
     border-radius: 8px;

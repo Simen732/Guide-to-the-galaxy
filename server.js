@@ -71,10 +71,16 @@ const Guide = mongoose.model("Guide", guideSchema);
 
   
 
-app.get("/", (req, res) => {
-    res.render("index");
-
+app.get("/", async (req, res) => {
+    try {
+        const guides = await Guide.find(); // Fetch all guides
+        res.render("index", { guides });
+    } catch (error) {
+        console.error("Error fetching guides:", error);
+        res.status(500).send("Server error");
+    }
 });
+
 
 app.get("/guide", async (req, res) => {
     try {
@@ -89,6 +95,15 @@ app.get("/guide", async (req, res) => {
     }
 });
 
+app.get("/guide/:id", async (req, res) => {
+    try {
+        const guide = await Guide.findById(req.params.id); // Fetch guide by ID
+        res.render("guide", { guide });
+    } catch (error) {
+        console.error("Error fetching guide:", error);
+        res.status(500).send("Server error");
+    }
+});
 
 
 app.get("/dashboard", (req, res) => {

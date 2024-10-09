@@ -1,36 +1,91 @@
 <%- include("./partials/head") %>
 <body>
-  <div class="gridConteiner">
-    <!-- Navbar/Sidebar with dynamic guide links -->
-    <div class="aside">
-      <% if (guides.length > 0) { %>
-        <% guides.forEach((guide, index) => { %>
-          <!-- Link to each guide section -->
-          <a href="#guide-<%= index %>">
-            <h3><%= guide.titel %></h3>
-          </a>
-        <% }) %>
-      <% } else { %>
-        <h3>No guides available yet!</h3>
-      <% } %>
+    <style>
+        /* Grid layout */
+        .container {
+            display: grid;
+            grid-template-columns: 250px 1fr; /* Sidebar and content */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Styling for the left-side navbar */
+        .navbar {
+            background-color: #222;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .navbar a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 0;
+            transition: background 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #444;
+        }
+
+        /* Guide content styling */
+        .guide-section {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .guide-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        h2 {
+            color: #ffb400; /* Make the headings stand out */
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+        #section{
+          scroll-behavior: smooth; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Left-side Navbar -->
+        <nav class="navbar">
+            <h2>Table of Contents</h2>
+            <% if (guide.overskrift && Array.isArray(guide.overskrift)) { %>
+                <% guide.overskrift.forEach(function(heading, index) { %>
+                    <a href="#section<%= index %>"><%= heading %></a>
+                <% }) %>
+            <% } %>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main>
+            <% if (guide.overskrift && Array.isArray(guide.overskrift)) { %>
+                <% guide.overskrift.forEach(function(heading, index) { %>
+                    <section class="guide-section" id="section<%= index %>">
+                        <h2><%= heading %></h2>
+                        <p><%= guide.beskrivelse[index] %></p>
+                        <% if (guide.imgFile[index]) { %>
+                            <img src="/uploads/<%= guide.imgFile[index] %>" alt="Image for <%= heading %>">
+                        <% } %>
+                    </section>
+                <% }) %>
+            <% } %>
+        </main>
     </div>
 
-    <!-- Main content where guides are displayed -->
-    <div class="main">
-      <% if (guides.length > 0) { %>
-        <% guides.forEach((guide, index) => { %>
-          <div id="guide-<%= index %>" class="section">
-            <h2 class="sectionTitle"><%= guide.titel %></h2>
-            <% if (guide.imgFile.length > 0) { %>
-              <img src="/uploads/<%= guide.imgFile[0] %>" alt="Guide Image" style="width: 200px;">
-            <% } %>
-            <p class="sectionText"><%= guide.beskrivelse[0] %></p>
-          </div>
-        <% }) %>
-      <% } else { %>
-        <h2>No guides available yet!</h2>
-      <% } %>
-    </div>
-  </div>
+
+
 </body>
 </html>
