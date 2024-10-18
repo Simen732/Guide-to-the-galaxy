@@ -1,0 +1,72 @@
+<%- include("./partials/head") %>
+<body>
+    <script>
+        // Funksjon for å legge til en ny seksjon (overskrift, beskrivelse og bilde)
+        function addSection() {
+            const sectionContainer = document.getElementById("sections-container");
+
+            const newSection = document.createElement("div");
+            newSection.classList.add("section");
+
+            newSection.innerHTML = `
+                <label for="overskrift">Overskrift:</label>
+                <input type="text" name="overskrift" required>
+
+                <label for="beskrivelse">Beskrivelse:</label>
+                <textarea name="beskrivelse" required></textarea>
+
+                <label for="bilde">Last opp bilde:</label>
+                <input type="file" name="bilde" multiple accept="image/png, image/jpg, image/jpeg">
+
+                
+            `;
+
+            sectionContainer.appendChild(newSection);
+        }
+    </script>
+</head>
+<body>
+    <h1>Edit Guide</h1>
+
+    <form action="/editGuide/<%= guide._id %>" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="tittel">Tittel:</label>
+            <input type="text" name="tittel" value="<%= guide.titel %>" required>
+        </div>
+
+        <div class="tittelEdit">
+            <label for="tag">Tag:</label>
+            <input type="text" name="tag" value="<%= guide.tag %>" required>
+        </div>
+
+        <div id="sections-container">
+            <!-- Eksisterende seksjoner med overskrift, beskrivelse og bilde -->
+            <% guide.overskrift.forEach(function(overskrift, index) { %>
+                <div class="section edit">
+                    <label for="overskrift">Overskrift:</label>
+                    <input type="text" name="overskrift" value="<%= overskrift %>" required>
+
+                    <label for="beskrivelse">Beskrivelse:</label>
+                    <textarea name="beskrivelse" required><%= guide.beskrivelse[index] %></textarea>
+
+                    <label for="bilde">Last opp bilde:</label>
+                    <input type="file" name="bilde" multiple>
+                    
+                    <!-- Vis eksisterende bilder (valgfritt) -->
+                    <% if (guide.imgFile && guide.imgFile[index]) { %>
+                        <p>Eksisterende bilde:</p>
+                        <img src="/uploads/<%= guide.imgFile[index] %>" alt="Guide Image" width="100">
+                    <% } %>
+                </div>
+            <% }); %>
+        </div>
+
+        <!-- Knapp for å legge til ny seksjon -->
+        <button type="button" onclick="addSection()">Legg til ny seksjon</button>
+
+        <button type="submit">Lagre endringer</button>
+
+        <a href="/">Tilbake</a>
+    </form>
+</body>
+</html>

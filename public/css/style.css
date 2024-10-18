@@ -1,16 +1,16 @@
-:root{
-    --hovedfarge: #1F1F1F;;
-    --farge2    : rgb(66, 68, 68);
+:root {
+    --hovedfarge: #1F1F1F;
+    --farge2: rgb(66, 68, 68);
     --hvitfarge: rgb(172, 172, 172);
     --gråfarge: #4e4e4e;
+    --gulfarge: #ffb400;
 }
 
-html{
-
+html {
+    /* Add any global styling for html if necessary */
 }
 
-
-body{
+body {
     background-color: var(--hovedfarge);
     margin: 0px;
     display: flex;
@@ -18,7 +18,8 @@ body{
     align-items: center;
 }
 
-#navbar{
+#navbar {
+    z-index: 0;
     box-shadow: 0px 0px 5px var(--farge2); /* horizontal offset, vertical offset, blur, color */
     display: flex;
     flex-direction: row;
@@ -26,36 +27,43 @@ body{
     border-bottom: solid 2px var(--farge2);
     width: 100%;
     list-style-type: none;
-    
+    position: fixed; 
 }
 
-#navbar :first-child{
+#navbar :first-child {
     flex-grow: 2;
-    
 }
 
-#navbar a{
+#navbar a {
     margin-left: 20px;
     margin-right: 20px;
     padding: 20px;
     text-decoration: none;
-    color: var(--hvitfarge)
+    color: var(--gulfarge);
 }
 
-#inputFelt{
+#navbar a:hover {
+    color: var(--hvitfarge);
+    border-color: var(--hover-farge); /* Slight border change on hover */
+}
+
+/* Input field */
+#inputFelt {
+    z-index: 2;
     background-color: var(--farge2);
-    box-shadow: 0px 2px 5px var(--farge2); /* horizontal offset, vertical offset, blur, color */
-    margin: 3% 0%;
+    box-shadow: 0px 2px 5px var(--farge2);
+    margin: 100px;
     width: 50%;
     height: 40px;
     font-size: 20px;
     border-radius: 20px;
     padding-left: 12px;
     color: azure;
-   
 }
 
-.guideBox{
+/* Guide boxes */
+.guideBox {
+    z-index: 2;
     background-color: var(--farge2);
     box-shadow: 0px 0px 5px #a79d9d;
     margin-bottom: 5%;
@@ -65,48 +73,53 @@ body{
     width: 20%;
     min-width: 300px;
     height: 200px;
+    color: var(--gulfarge);
 }
 
+.guideBox p {
+    padding-left: 20px;
+}
 
+.guideBox h2 {
+    padding-left: 20px;
+}
 
-.guideBoxDiv{
-
+.guideBoxDiv {
     gap: 5%;
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
     display: flex;
     column-gap: 5%;
+    flex-direction: column-reverse;
+    align-content: center;  
 }
 
-
-input::placeholder{
+input::placeholder {
     padding-left: 12px;
 }
 
 input:focus {
-    padding-left: 10px;
     outline: none;
-    padding-left: 12px;
 }
 
 input {
     outline: none;
     border: 1px solid black;
-    color: var(--gråfarge)
+    color: var(--gråfarge);
 }
 
-.gridConteiner{
+/* Grid container */
+.gridConteiner {
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-template-areas: 
-    "aside main main main main"
-    ;
+        "aside main main main main";
     min-height: 1000px;
     width: 100%;
 }
 
-.aside{
+.aside {
     padding-top: 40px;
     grid-area: aside;
     background-color: var(--gråfarge);
@@ -115,15 +128,13 @@ input {
     align-items: center;
 }
 
-.aside a{
+.aside a {
     text-decoration: none;
     list-style: none;
-    list-style-type: none;
     color: var(--hovedfarge);
 }
 
-
-.main{
+.main {
     scroll-behavior: smooth;
     max-height: 100vh;
     overflow-y: scroll;
@@ -135,55 +146,50 @@ input {
     align-items: center;
 }
 
-
 .section {
-    background-color: #1e1e1e;          
-    border: 2px solid #333;         
-    border-radius: 8px;                
-    padding: 40px;                      
-    margin: 40px 0;                   
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
-    transition: transform 0.2s;        
-  }
-  
+    background-color: #1e1e1e;
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 40px;
+    margin: 40px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s;
+    display: flex !important;
+}
 
-  .sectionTitle { 
-    font-size: 3.6em;               
-    margin-bottom: 20px;               
-  }
-  
-  
-  .sectionText {
-    font-size: 2.4em;                  
-    line-height: 1.5;                  
-  }
-  
-  .section img {
-    width: 100%;               
-    height: auto;      
-    max-width: 800px;          
-    margin: 20px 0;            
-    border-radius: 8px;        
-  }
+.sectionTitle {
+    font-size: 3.6em;
+    margin-bottom: 20px;
+}
 
+.sectionText {
+    font-size: 2.4em;
+    line-height: 1.5;
+}
 
-  .section:hover {
-    transform: scale(1.02);             
-    border-color: #666;                 
-  }
-  
+.section img {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
 
-  img {
-    max-width: 400px;           
+.section:hover {
+    transform: scale(1.02);
+    border-color: #666;
+}
+
+img {
+    max-width: 400px;
     height: auto;
     margin-top: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  
+}
 
-#LoginConteiner{
+/* Login container */
+#LoginConteiner {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -192,17 +198,274 @@ input {
     padding-bottom: 20%;
     min-width: 30%;
     margin-top: 10%;
-
 }
 
-#LoginConteiner form{
+#LoginConteiner form {
     display: flex;
     flex-direction: column;
-}    
+}
 
-
-
-form input{
+form input {
     margin: 5px;
 }
 
+/* Edit sections */
+.edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.edit section {
+    margin-top: 500px;
+    background-color: var(--farge2);
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    max-width: 200px;
+    width: 100%;
+    text-align: center;
+}
+
+.edit h2, .edit p {
+    color: var(--hvitfarge);
+}
+
+.edit img {
+    height: auto;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tittelEdit {
+    padding-bottom: 50px;
+}
+
+/* GuideBox links */
+.guideBox a {
+    display: inline-block;
+    background-color: var(--hover-farge);
+    color: var(--gulfarge);
+    padding: 10px 20px;
+    border: 2px solid var(--border-farge);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+    text-align: center;
+}
+
+.guideBox a:hover {
+    background-color: var(--hovedfarge);
+    color: var(--hvitfarge);
+    border-color: var(--hover-farge);
+}
+
+/* Logout button */
+.logout {
+    display: inline-block;
+    background-color: var(--hover-farge);
+    color: var(--gulfarge);
+    padding: 10px 20px;
+    padding-top: 16px;
+    border: 2px solid var(--border-farge);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+    text-align: center;
+}
+
+.logout:hover {
+    background-color: var(--hovedfarge);
+    color: var(--hvitfarge);
+    border-color: var(--hover-farge);
+}
+
+/* General link styling */
+a {
+    color: var(--gulfarge);
+}
+
+/* Styles for guide.ejs */
+.container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 20px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.navbar {
+    flex: 0 0 250px; /* Fixed width for navbar */
+    overflow-y: auto; /* Allow navbar to scroll independently */
+    padding: 20px;
+    background-color: var(--hovedfarge);
+    color: var(--hvitfarge);
+}
+
+
+.navbar a {
+    display: block;
+    color: var(--hvitfarge);
+    text-decoration: none;
+    padding: 10px 0;
+    transition: background 0.3s;
+}
+
+.navbar a:hover {
+    background-color: var(--gråfarge);
+}
+
+.guide-section {
+    background-color: #333;
+    color: var(--hvitfarge);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.guide-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+h2 {
+    color: var(--gulfarge);
+}
+
+p {
+    font-size: 1.2rem;
+}
+
+#section {
+    scroll-behavior: smooth; 
+}
+
+
+.title{
+    margin-top: 120px;
+}
+
+input{
+    color: white;
+    background-color: var(--gråfarge);
+    border-radius: 0px;
+    padding: 10px 40%;
+}
+
+button{
+    
+    background-color: var(--gråfarge);
+}
+
+textarea{
+    background-color: var(--gråfarge);
+    color: white;
+}
+
+
+.idk{
+    padding-left: 20px;
+    background-color: #333;
+}
+
+#Tilbake{
+    color: var(--gulfarge);
+    border: solid 2px var(--gråfarge);
+    margin-right: 75%;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        padding: 5px;
+    }
+
+    .navbar {
+        /* position: fixed; */
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 5px;
+        max-height: 30vh;
+        overflow-y: auto;
+        background-color: rgba(51, 51, 51, 0.95);
+        margin-bottom: -135px;
+        margin-top: 10px !important;
+        padding-right: -10px;
+    }
+
+    .navbar h2 {
+        font-size: 1em;
+        margin: 5px 0;
+    }
+
+    .navbar a {
+        display: inline-block;
+        padding: 3px 6px;
+        font-size: 0.8em;
+        margin: 2px;
+    }
+
+    #Tilbake {
+        margin-right: 0;
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    main {
+        margin-top: 32vh;
+    }
+
+    .guide-section {
+        padding: 10px;
+    }
+
+    .guide-section h2 {
+        font-size: 1.3em;
+    }
+
+    .guide-section p {
+        font-size: 0.9em;
+    }
+
+    /* Adjust other elements as needed... */
+}
+
+/* For even smaller devices */
+@media (max-width: 480px) {
+    .navbar {
+        max-height: 25vh;
+        margin-top: 20px;
+
+    }
+
+    .navbar h2 {
+        font-size: 0.9em;
+    }
+
+    .navbar a {
+        font-size: 0.7em;
+        padding: 2px 4px;
+    }
+
+    main {
+        margin-top: 27vh;
+    }
+}

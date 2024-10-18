@@ -1,7 +1,7 @@
 <%- include("./partials/head") %>
 <body>
   <%- include("./partials/nav") %>
-  <h1>Create New Guide</h1>
+  <h1 class="title">Create New Guide</h1>
   <form id="guideForm" enctype="multipart/form-data" method="post">
       <h3>Tittel</h3>
       <input type="text" name="tittel" required>
@@ -16,7 +16,7 @@
           <h3>Beskrivelse</h3>
           <input type="text" name="beskrivelse" required>
           <h3>Bilde</h3>
-          <input type="file" name="bilde" accept="image/png, image/jpg, image/jpeg" required>
+          <input id="bilde" type="file" name="bilde" accept="image/png, image/jpg, image/jpeg">
       </div>
       <button type="submit">Send inn</button>
   </form>
@@ -31,28 +31,33 @@
                   <h3>Overskrift</h3>
                   <input type="text" name="overskrift" required>
                   <h3>Beskrivelse</h3>
-                  <input type="text" name="beskrivelse" required>
+                  <input type="textarea" name="beskrivelse" required>
                   <h3>Bilde</h3>
-                  <input type="file" name="bilde" accept="image/png, image/jpg, image/jpeg" required>
+                  <input type="file" name="bilde" accept="image/png, image/jpg, image/jpeg">
               </div>
           `;
       }
 
       document.getElementById('guideForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const formData = new FormData(this);
-        fetch('/newGuide', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-          window.location.href = '/dashboard';
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-      });
+    event.preventDefault(); // Prevent default form submission
+    const formData = new FormData(this);
+
+    fetch('/newGuide', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            // Redirect the user to the homepage after successful form submission
+            window.location.href = '/';
+        } else {
+            console.error('Failed to submit the form');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
   </script>
 </body>

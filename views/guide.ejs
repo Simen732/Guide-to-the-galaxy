@@ -1,67 +1,10 @@
 <%- include("./partials/head") %>
 <body>
-    <style>
-        /* Grid layout */
-        .container {
-            display: grid;
-            grid-template-columns: 250px 1fr; /* Sidebar and content */
-            gap: 20px;
-            padding: 20px;
-        }
-
-        /* Styling for the left-side navbar */
-        .navbar {
-            background-color: #222;
-            color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .navbar a {
-            display: block;
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 0;
-            transition: background 0.3s;
-        }
-        .navbar a:hover {
-            background-color: #444;
-        }
-
-        /* Guide content styling */
-        .guide-section {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .guide-section img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        h2 {
-            color: #ffb400; /* Make the headings stand out */
-        }
-
-        p {
-            font-size: 1.2rem;
-        }
-
-        #section{
-          scroll-behavior: smooth; 
-        }
-
-    </style>
-</head>
-<body>
-
     <div class="container">
         <!-- Left-side Navbar -->
-        <nav class="navbar">
+        <nav class="navbar idk">
             <h2>Table of Contents</h2>
+            <a href="/" id="Tilbake">Tilbake</a>
             <% if (guide.overskrift && Array.isArray(guide.overskrift)) { %>
                 <% guide.overskrift.forEach(function(heading, index) { %>
                     <a href="#section<%= index %>"><%= heading %></a>
@@ -84,8 +27,5 @@
             <% } %>
         </main>
     </div>
-
-
-
 </body>
 </html>

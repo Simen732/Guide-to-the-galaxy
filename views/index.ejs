@@ -7,9 +7,10 @@
 <div class="guideBoxDiv">
     <% guides.forEach(function(guide) { %>
         <div class="guideBox">
-            <h3><%= guide.titel %></h3>
+            <h2><%= guide.titel %></h2>
             <p><%= guide.tag %></p>
-            <a href="/guide/<%= guide._id %>">Read more</a>
+            <a href="/guide/<%= guide._id %>">les mer</a>
+            <a href="/editGuide/<%= guide._id %>">Rediger</a> <!-- Ny rediger knapp -->
         </div>
     <% }) %>
 </div>
@@ -19,7 +20,7 @@
     searchInput.addEventListener('input', function(e) {
         const query = e.target.value.toLowerCase();
         document.querySelectorAll('.guideBox').forEach(item => {
-            const title = item.querySelector('h3').textContent.toLowerCase();
+            const title = item.querySelector('h2').textContent.toLowerCase();
             const tag = item.querySelector('p').textContent.toLowerCase();
             if (title.includes(query) || tag.includes(query)) {
                 item.style.display = 'block';
