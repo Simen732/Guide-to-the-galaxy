@@ -20,10 +20,10 @@ jobs:
           cd /var/www/helpdesk
           git pull --no-edit origin main
 
-      - name: verify Pull
+      - name: verify pull
         run: |
           cd /var/www/helpdesk
-         git log -1 --oneline 
+          git log -1 --oneline 
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
