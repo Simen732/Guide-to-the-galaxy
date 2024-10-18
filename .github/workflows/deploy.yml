@@ -21,11 +21,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: "18"
 
       - name: Install dependencies
         working-directory: ./
-        npm: i
+        run: npm i
 
       - name: Reload with PM2
         run: | 
@@ -39,4 +39,3 @@ jobs:
             echo "One or more processes are stopped or errored. Please check the server logs."
             exit 1
           fi
-          
