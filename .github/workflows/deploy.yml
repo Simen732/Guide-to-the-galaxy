@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./
-        run: npm i
+        run: cd /var/www/helpdesk && npm install
 
       - name: Reload with PM2
         run: | 
