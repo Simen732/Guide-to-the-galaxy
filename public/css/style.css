@@ -7,7 +7,7 @@
 }
 
 html {
-    /* Add any global styling for html if necessary */
+    scroll-behavior: smooth; /* Enables smooth scrolling for the entire document */
 }
 
 body {
@@ -16,6 +16,63 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#LoginConteiner {
+    background-color: var(--farge2);
+    border: 2px solid var(--gråfarge);
+    border-radius: 10px;
+    padding: 40px;
+    max-width: 400px;
+    width: 90%;
+    margin: 100px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#LoginConteiner h1 {
+    color: var(--gulfarge);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#LoginConteiner form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#LoginConteiner input {
+    background-color: var(--hovedfarge);
+    border: 1px solid var(--gråfarge);
+    border-radius: 5px;
+    padding: 12px;
+    color: var(--hvitfarge);
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#LoginConteiner input[type="submit"] {
+    background-color: var(--gulfarge);
+    color: var(--hovedfarge);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#LoginConteiner input[type="submit"]:hover {
+    background-color: #ffc740;
+}
+
+#LoginConteiner a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: var(--hvitfarge);
+    text-decoration: none;
+}
+
+#LoginConteiner a:hover {
+    color: var(--gulfarge);
 }
 
 #navbar {
@@ -135,7 +192,7 @@ input {
 }
 
 .main {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; 
     max-height: 100vh;
     overflow-y: scroll;
     color: var(--hvitfarge);
@@ -145,6 +202,8 @@ input {
     flex-direction: column;
     align-items: center;
 }
+
+
 
 .section {
     background-color: #1e1e1e;
@@ -353,15 +412,17 @@ p {
 }
 
 
-.title{
-    margin-top: 120px;
+.title {
+    color: var(--gulfarge);
+    text-align: center;
+    margin: 60px 0;
+    padding-top: 20px;
 }
 
 input{
     color: white;
     background-color: var(--gråfarge);
     border-radius: 0px;
-    padding: 10px 40%;
 }
 
 button{
@@ -378,7 +439,65 @@ textarea{
 .idk{
     padding-left: 20px;
     background-color: #333;
+    display: flex;
+    flex-direction: column;
 }
+
+#guideForm {
+    background-color: var(--farge2);
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 600px;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+#guideForm h2, #guideForm h3 {
+    color: var(--gulfarge);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#guideForm input[type="text"],
+#guideForm input[type="file"],
+#guideForm textarea {
+    background-color: var(--hovedfarge);
+    border: 1px solid var(--gråfarge);
+    border-radius: 5px;
+    padding: 10px;
+    color: var(--hvitfarge);
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+#guideForm button,
+button {
+    background-color: var(--gulfarge);
+    color: var(--hovedfarge);
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+#guideForm button:hover,
+button:hover {
+    background-color: #ffc740;
+}
+
+#addNewSection {
+    border-top: 1px solid var(--gråfarge);
+    margin-top: 30px;
+    padding-top: 20px;
+}
+
 
 #Tilbake{
     color: var(--gulfarge);
@@ -396,20 +515,43 @@ textarea{
         padding: 5px;
     }
 
-    .navbar {
-        /* position: fixed; */
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        padding: 5px;
-        max-height: 30vh;
-        overflow-y: auto;
-        background-color: rgba(51, 51, 51, 0.95);
-        margin-bottom: -135px;
-        margin-top: 10px !important;
-        padding-right: -10px;
+    #LoginConteiner,
+    #guideForm {
+        width: 95%;
+        padding: 20px;
     }
+
+    .title {
+        font-size: 24px;
+    }
+
+    #guideForm h2 {
+        font-size: 20px;
+    }
+
+    #guideForm h3 {
+        font-size: 18px;
+    }
+}
+
+.navbar {
+    z-index: 100; /* Ensures the navbar stays on top of other content */
+    box-shadow: 0px 0px 5px var(--farge2); 
+    display: flex;
+    flex-direction: column; /* Change direction to column */
+    justify-content: flex-start; /* Aligns items to the top of the column */
+    border-bottom: none; /* Remove border if necessary, since it's now vertical */
+    width: 250px; /* Set width appropriate for a vertical navbar */
+    height: 100vh; /* Make it span the full height of the viewport */
+    list-style-type: none;
+    position: fixed; 
+    top: 0; /* Fixes the navbar at the top of the viewport */
+    left: 0; /* Aligns it to the left */
+    background-color: var(--hovedfarge); /* Makes sure background remains visible */
+    padding: 20px; /* Add some padding to give space */
+}
+
+
 
     .navbar h2 {
         font-size: 1em;
@@ -429,10 +571,6 @@ textarea{
         margin-bottom: 5px;
     }
 
-    main {
-        margin-top: 32vh;
-    }
-
     .guide-section {
         padding: 10px;
     }
@@ -446,7 +584,6 @@ textarea{
     }
 
     /* Adjust other elements as needed... */
-}
 
 /* For even smaller devices */
 @media (max-width: 480px) {

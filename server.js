@@ -77,6 +77,7 @@ app.post("/signUp", async (req, res) => {
     }
 });
 
+
 app.post("/login", async (req, res) => {
     try {
         const { brukernavn, password } = req.body;

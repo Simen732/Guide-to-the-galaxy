@@ -3,40 +3,40 @@
   <%- include("./partials/nav") %>
   <h1 class="title">Create New Guide</h1>
   <form id="guideForm" enctype="multipart/form-data" method="post">
-      <h3>Tittel</h3>
-      <input type="text" name="tittel" required>
-      
-      <h3>Tag</h3>
-      <input type="text" name="tag" required>
+    <h3>Tittel</h3>
+    <input type="text" name="tittel" required>
+    
+    <h3>Tag</h3>
+    <input type="text" name="tag" required>
 
-      <div id="addNewSection">
-          <h2>Seksjon</h2>
-          <h3>Overskrift</h3>
-          <input type="text" name="overskrift" required>
-          <h3>Beskrivelse</h3>
-          <input type="text" name="beskrivelse" required>
-          <h3>Bilde</h3>
-          <input id="bilde" type="file" name="bilde" accept="image/png, image/jpg, image/jpeg">
-      </div>
-      <button type="submit">Send inn</button>
-  </form>
-  <button onclick="lagNySeksjon()">New Section</button>
+    <div id="addNewSection">
+        <h2>Seksjon</h2>
+        <h3>Overskrift</h3>
+        <input type="text" name="overskrift" required>
+        <h3>Beskrivelse</h3>
+        <textarea name="beskrivelse" required></textarea>
+        <h3>Bilde</h3>
+        <input id="bilde" type="file" name="bilde" accept="image/png, image/jpg, image/jpeg">
+    </div>
+    <button type="submit">Send inn</button>
+</form>
+<button onclick="lagNySeksjon()">New Section</button>
 
   <script>
-      function lagNySeksjon() {
-          const newSection = document.querySelector("#addNewSection");
-          newSection.innerHTML += `
-              <div>
-                  <h2>Seksjon</h2>
-                  <h3>Overskrift</h3>
-                  <input type="text" name="overskrift" required>
-                  <h3>Beskrivelse</h3>
-                  <input type="textarea" name="beskrivelse" required>
-                  <h3>Bilde</h3>
-                  <input type="file" name="bilde" accept="image/png, image/jpg, image/jpeg">
-              </div>
-          `;
-      }
+function lagNySeksjon() {
+    const newSection = document.querySelector("#addNewSection");
+    const newSectionDiv = document.createElement('div');
+    newSectionDiv.innerHTML = `
+        <h2>Seksjon</h2>
+        <h3>Overskrift</h3>
+        <input type="text" name="overskrift" required>
+        <h3>Beskrivelse</h3>
+        <textarea name="beskrivelse" required></textarea>
+        <h3>Bilde</h3>
+        <input type="file" name="bilde" accept="image/png, image/jpg, image/jpeg">
+    `;
+    newSection.appendChild(newSectionDiv);
+}
 
       document.getElementById('guideForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission
